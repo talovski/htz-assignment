@@ -9,7 +9,7 @@ export default function CitySelector() {
   return (
     <div className="font-xl flex gap-6 pb-6">
       <Link
-        href={"/zurich/arrivals"}
+        href={"/zurich/arrival"}
         className={
           pathname.includes("zurich")
             ? "font-bold underline decoration-2 underline-offset-4"
@@ -19,7 +19,7 @@ export default function CitySelector() {
         Zurich
       </Link>
       <Link
-        href={"/basel/arrivals"}
+        href={"/basel/arrival"}
         className={
           pathname.includes("basel")
             ? "font-bold underline decoration-2 underline-offset-4"
