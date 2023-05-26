@@ -1,7 +1,7 @@
 import { getScheduleData } from "@/lib/getScheduleData";
 import Train from "@/app/[city]/[direction]/components/Train";
 
-async function generateStaticParams({
+export async function generateStaticParams({
   params,
 }: {
   params: { city: string; direction: string };

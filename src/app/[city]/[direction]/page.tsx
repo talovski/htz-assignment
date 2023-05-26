@@ -6,9 +6,9 @@ export async function generateStaticParams({
 }: {
   params: { city: string };
 }) {
-  const dirs = ["arrival", "departure"];
-  const res = dirs.map((dir) => {
-    return { city: city, direction: dir };
+  const directions = ["arrival", "departure"];
+  const res = directions.map((direction) => {
+    return { city: city, direction: direction };
   });
   return res;
 }
