@@ -28,16 +28,16 @@ export default async function Destination({
 
   const decodedDest = decodeURIComponent(params.destination);
 
-  const res = data.stationboard.filter(
+  const trains = data.stationboard.filter(
     (station) => station.to.toLowerCase() === decodedDest.toLowerCase()
   );
   return (
     <div>
       {decodedDest}
-      {res.map((r) => (
+      {trains.map((train) => (
         <>
-          <p key={r.name}>Train number: {r.name}</p>
-          <p>To: {r.to}</p>
+          <p key={train.name}>Train number: {train.name}</p>
+          <p>To: {train.to}</p>
         </>
       ))}
     </div>

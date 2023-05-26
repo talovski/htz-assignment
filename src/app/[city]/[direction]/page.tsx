@@ -1,6 +1,4 @@
 import { getScheduleData } from "@/lib/getScheduleData";
-import Sidebar from "@/app/[city]/[direction]/components/Sidebar";
-import { Directions } from "@/types/types";
 
 export async function generateStaticParams({
   params: { city },
@@ -19,14 +17,14 @@ export default async function Direction({
 }: {
   params: { city: string; direction: string };
 }) {
-  const data = await getScheduleData(params.city, params.direction);
+  const schedule = await getScheduleData(params.city, params.direction);
 
   return (
     <div>
-      {data.stationboard.map((st) => (
-        <div key={st.name}>
-          <p>{st.to}</p>
-          <p>{st.name}</p>
+      {schedule.stationboard.map((train) => (
+        <div key={train.name}>
+          <p>{train.to}</p>
+          <p>{train.name}</p>
         </div>
       ))}
     </div>

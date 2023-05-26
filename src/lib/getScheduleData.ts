@@ -10,5 +10,5 @@ export async function getScheduleData(
       next: { revalidate: 10 },
     }
   );
-  return (await res.json()) as Promise<ScheduleType>;
+  return (await res.json()) as ScheduleType;
 }

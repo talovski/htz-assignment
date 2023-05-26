@@ -1,21 +1,18 @@
 "use client";
 
-import { Stationboard } from "@/types/types";
-import { getUniqueDestinations } from "@/lib/getUniqueDestinations";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export default function Sidebar({
-  trains,
+  uniqueDestinations,
   dir,
   city,
 }: {
-  trains: Stationboard[];
+  uniqueDestinations: string[];
   dir: string;
   city: string;
 }) {
   const pathname = usePathname();
-  const uniqueDestinations = getUniqueDestinations(trains);
 
   return (
     <div className="relative">

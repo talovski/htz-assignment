@@ -1,5 +1,3 @@
-import { Directions, Stationboard } from "@/types/types";
-
 export default function Train({
   name,
   to,
