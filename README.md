@@ -1,4 +1,4 @@
-Hosted on Vercel at [https://htz-assignment.vercel.app/](https://htz-assignment.vercel.app/).
+Hosted on Vercel at [https://htz-assignment.vercel.app/basel/arrival](https://htz-assignment.vercel.app/).
 
 Stack:
 - Next.js with App router
