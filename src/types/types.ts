@@ -1,6 +1,3 @@
-export type Cities = "basel" | "zurich";
-export type Directions = "arrival" | "departure";
-
 type Coordinate = {
   type: string;
   x: number;
@@ -53,13 +50,3 @@ export type Schedule = {
   station: Station;
   stationboard: Stationboard[];
 }
-
-export const cities = [
-  { city: "bazel" },
-  { city: "zurich" }
-] as const;
-
-export const directions = {
-  arrivals: "arrivals",
-  departures: "departures"
-} as const;

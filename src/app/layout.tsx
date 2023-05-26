@@ -1,6 +1,5 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
-import Link from "next/link";
 import CitySelector from "@/app/components/CitySelector";
 
 const inter = Inter({ subsets: ["latin"] });

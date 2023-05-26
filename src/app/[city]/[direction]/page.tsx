@@ -1,30 +1,39 @@
 import { getScheduleData } from "@/lib/getScheduleData";
-import List from "@/app/[city]/[direction]/components/List";
-import { Cities, Directions } from "@/types/types";
+import Train from "@/app/[city]/[direction]/components/Train";
 
-export async function generateStaticParams() {
-  return [
-    {
-      direction: "arrival",
-      city: "basel",
-    },
-    {
-      direction: "departure",
-      city: "zurich",
-    },
-  ];
+export async function generateStaticParams({
+  params: { city },
+}: {
+  params: { city: string };
+}) {
+  const dirs = ["arrival", "departure"];
+  const res = dirs.map((dir) => {
+    return { city: city, direction: dir };
+  });
+  return res;
 }
 
 export default async function Direction({
   params,
 }: {
-  params: { direction: Directions; city: Cities };
+  params: { city: string; direction: string };
 }) {
-  const data = await getScheduleData(params.city, params.direction);
+  const schedule = await getScheduleData(params.city, params.direction);
 
   return (
     <div>
-      <List trains={data.stationboard} direction={params.direction} />
+      {schedule.stationboard.map((train) => (
+        <Train
+          key={train.name}
+          name={train.name}
+          to={train.to}
+          time={
+            params.direction === "departure"
+              ? train.stop.departure
+              : train.stop.arrival ?? train.stop.prognosis.arrival
+          }
+        />
+      ))}
     </div>
   );
 }
