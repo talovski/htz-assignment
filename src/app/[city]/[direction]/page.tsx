@@ -1,4 +1,5 @@
 import { getScheduleData } from "@/lib/getScheduleData";
+import Train from "@/app/[city]/[direction]/components/Train";
 
 export async function generateStaticParams({
   params: { city },
@@ -22,10 +23,16 @@ export default async function Direction({
   return (
     <div>
       {schedule.stationboard.map((train) => (
-        <div key={train.name}>
-          <p>{train.to}</p>
-          <p>{train.name}</p>
-        </div>
+        <Train
+          key={train.name}
+          name={train.name}
+          to={train.to}
+          time={
+            params.direction === "departure"
+              ? train.stop.departure
+              : train.stop.arrival ?? train.stop.prognosis.arrival
+          }
+        />
       ))}
     </div>
   );

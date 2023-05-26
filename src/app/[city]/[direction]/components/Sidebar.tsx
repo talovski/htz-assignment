@@ -5,11 +5,11 @@ import { usePathname } from "next/navigation";
 
 export default function Sidebar({
   uniqueDestinations,
-  dir,
+  direction,
   city,
 }: {
   uniqueDestinations: string[];
-  dir: string;
+  direction: string;
   city: string;
 }) {
   const pathname = usePathname();
@@ -21,9 +21,9 @@ export default function Sidebar({
           <h2 className="font-bold">Destinations</h2>
           <div className="flex flex-col">
             <Link
-              href={`${city}/${dir}/`}
+              href={`${city}/${direction}/`}
               className={
-                pathname.endsWith(`${dir}`)
+                pathname.endsWith(`${direction}`)
                   ? "cursor-pointer font-bold underline decoration-1 underline-offset-4"
                   : "cursor-pointer hover:underline hover:decoration-1 hover:underline-offset-4"
               }
@@ -32,11 +32,11 @@ export default function Sidebar({
             </Link>
             {uniqueDestinations.map((dest) => (
               <Link
-                as={`${city}/${dir}/${encodeURIComponent(dest)}`}
+                as={`${city}/${direction}/${encodeURI(dest)}`}
                 key={dest}
-                href={`${city}/${dir}/${encodeURIComponent(dest)}`}
+                href={`${city}/${direction}/${encodeURI(dest)}`}
                 className={
-                  pathname.includes(encodeURIComponent(dest))
+                  pathname.includes(encodeURI(dest))
                     ? "cursor-pointer font-bold underline decoration-1 underline-offset-4"
                     : "cursor-pointer hover:underline hover:decoration-1 hover:underline-offset-4"
                 }

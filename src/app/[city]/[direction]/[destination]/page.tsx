@@ -1,4 +1,5 @@
 import { getScheduleData } from "@/lib/getScheduleData";
+import Train from "@/app/[city]/[direction]/components/Train";
 
 async function generateStaticParams({
   params,
@@ -26,19 +27,25 @@ export default async function Destination({
 }) {
   const data = await getScheduleData(params.city, params.direction);
 
-  const decodedDest = decodeURIComponent(params.destination);
+  const decodedDestination = decodeURI(params.destination);
 
   const trains = data.stationboard.filter(
-    (station) => station.to.toLowerCase() === decodedDest.toLowerCase()
+    (station) => station.to.toLowerCase() === decodedDestination.toLowerCase()
   );
   return (
     <div>
-      {decodedDest}
+      {decodedDestination}
       {trains.map((train) => (
-        <>
-          <p key={train.name}>Train number: {train.name}</p>
-          <p>To: {train.to}</p>
-        </>
+        <Train
+          key={train.name}
+          name={train.name}
+          to={train.to}
+          time={
+            params.direction === "departure"
+              ? train.stop.departure
+              : train.stop.arrival ?? train.stop.prognosis.arrival
+          }
+        />
       ))}
     </div>
   );

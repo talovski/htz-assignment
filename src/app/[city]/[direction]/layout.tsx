@@ -28,8 +28,12 @@ export default async function DirectionLayout({
   return (
     <div>
       <DirectionSelector />
-      <div className="w-full block md:flex items-start gap-9">
-        <Sidebar uniqueDestinations={uniqueDestinations} dir={params.direction} city={params.city} />
+      <div className="block w-full items-start gap-9 md:flex">
+        <Sidebar
+          uniqueDestinations={uniqueDestinations}
+          direction={params.direction}
+          city={params.city}
+        />
         {children}
       </div>
     </div>
