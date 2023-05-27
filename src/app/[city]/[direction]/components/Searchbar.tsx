@@ -1,26 +1,33 @@
 "use client";
-
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function Searchbar() {
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
+export default function Searchbar({
+  city,
+  direction,
+}: {
+  city: string;
+  direction: string;
+}) {
   const router = useRouter();
-  const [input, setInput] = useState(searchParams.get("search") || "");
+  const pathname = usePathname();
+  const [input, setInput] = useState(pathname.split("/")[3] || "");
 
-  const handleClick = (input: string) => {
-    router.push(`${pathname}/?search=${input}`);
+  const inputWithoutSlash = input.replace("/", " ");
+
+  const handleClick = () => {
+    router.replace(`${city}/${direction}/${inputWithoutSlash}`);
   };
 
   const handleResetClick = () => {
     setInput("");
-    router.push(`${pathname}`);
+    router.replace(`${city}/${direction}`);
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      router.push(`${pathname}/?search=${input}`);
+      router.replace(`${city}/${direction}/${inputWithoutSlash}`);
     }
   };
 
@@ -35,10 +42,10 @@ export default function Searchbar() {
           value={input}
           onChange={(event) => setInput(event.target.value)}
           onKeyDown={handleKeyDown}
-          className="border-b-[1px] border-b-gray-400 py-1 focus:border-b-orange-600"
+          className="rounded-md border-[1px] border-gray-600 py-1"
         />
         <button
-          onClick={() => handleClick(input)}
+          onClick={() => handleClick()}
           className="rounded-md bg-blue-600 px-2 py-1 text-white"
         >
           Filter!

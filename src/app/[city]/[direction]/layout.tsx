@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import DirectionSelector from "@/app/[city]/[direction]/components/DirectionSelector";
 import { getUniqueDestinations } from "@/lib/getUniqueDestinations";
 import { getScheduleData } from "@/lib/getScheduleData";
+import Searchbar from "@/app/[city]/[direction]/components/Searchbar";
 
 export async function generateStaticParams({
   params: { city },
@@ -24,6 +25,7 @@ export default async function DirectionLayout({
   return (
     <div className="w-full max-w-[70%]">
       <DirectionSelector />
+      <Searchbar city={params.city} direction={params.direction} />
       {children}
     </div>
   );
