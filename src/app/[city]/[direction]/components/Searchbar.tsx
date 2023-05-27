@@ -3,13 +3,7 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
-export default function Searchbar({
-  direction,
-  city,
-}: {
-  direction: string;
-  city: string;
-}) {
+export default function Searchbar() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
@@ -20,6 +14,7 @@ export default function Searchbar({
   };
 
   const handleResetClick = () => {
+    setInput("");
     router.push(`${pathname}`);
   };
 

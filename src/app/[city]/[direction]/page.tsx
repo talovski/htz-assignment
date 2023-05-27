@@ -47,7 +47,7 @@ export default async function Direction({
   return (
     <>
       <Suspense fallback={<SearchBarFallback />}>
-        <Searchbar direction={params.direction} city={params.city} />
+        <Searchbar />
       </Suspense>
       <div>
         {searchedSchedules.map((train) => (
