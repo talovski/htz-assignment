@@ -29,12 +29,6 @@ export default async function Filter({
     filter: string;
   };
 }) {
-  const formattedFilter = decodeURI(params.filter)
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/\p{Diacritic}/gu, "")
-    .replace("/", " ");
-
   const data = await getScheduleData(params.city, params.direction);
   const searchedSchedules = data.stationboard.filter((train) =>
     params.filter?.length
@@ -42,14 +36,12 @@ export default async function Filter({
           .toLowerCase()
           .normalize("NFD")
           .replace(/\p{Diacritic}/gu, "")
-          .replace("/", " ")
           .includes(
-            decodeURI(
+            decodeURIComponent(
               params.filter
                 .toLowerCase()
                 .normalize("NFD")
                 .replace(/\p{Diacritic}/gu, "")
-                .replace("/", " ")
             )
           )
       : data.stationboard

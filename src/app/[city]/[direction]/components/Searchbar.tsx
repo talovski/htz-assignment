@@ -14,10 +14,9 @@ export default function Searchbar({
   const pathname = usePathname();
   const [input, setInput] = useState(pathname.split("/")[3] || "");
 
-  const inputWithoutSlash = input.replace("/", " ");
 
   const handleClick = () => {
-    router.replace(`${city}/${direction}/${inputWithoutSlash}`);
+    router.replace(`${city}/${direction}/${encodeURIComponent(input)}`);
   };
 
   const handleResetClick = () => {
@@ -27,7 +26,7 @@ export default function Searchbar({
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      router.replace(`${city}/${direction}/${inputWithoutSlash}`);
+      router.replace(`${city}/${direction}/${encodeURIComponent(input)}`);
     }
   };
 
