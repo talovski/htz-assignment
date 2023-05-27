@@ -1,4 +1,5 @@
 "use client";
+
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
@@ -6,7 +7,6 @@ export default function DirectionSelector() {
   const pathname = usePathname();
 
   let city = pathname.split("/")[1];
-
 
   return (
     <div className="flex gap-6 pb-8">

@@ -15,7 +15,7 @@ export default function Train({
     : "No information";
 
   return (
-    <div className="flex flex-col gap-x-4 border-t-[1px] border-dotted border-gray-400 py-2 md:grid md:grid-cols-5">
+    <div className="flex flex-col gap-x-4 border-t-[1px] border-dotted border-gray-400 py-2 md:grid min-w-100 md:grid-cols-5">
       <p className="col-span-1">
         <span className="font-bold md:hidden">Train number: </span>
         {name}

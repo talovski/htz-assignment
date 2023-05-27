@@ -1,8 +1,7 @@
 import { ReactNode } from "react";
 import DirectionSelector from "@/app/[city]/[direction]/components/DirectionSelector";
-import { getScheduleData } from "@/lib/getScheduleData";
-import Sidebar from "@/app/[city]/[direction]/components/Sidebar";
 import { getUniqueDestinations } from "@/lib/getUniqueDestinations";
+import { getScheduleData } from "@/lib/getScheduleData";
 
 export async function generateStaticParams({
   params: { city },
@@ -22,20 +21,10 @@ export default async function DirectionLayout({
   children: ReactNode;
   params: { city: string; direction: string };
 }) {
-  const data = await getScheduleData(params.city, params.direction);
-  const uniqueDestinations = getUniqueDestinations(data.stationboard);
-
   return (
-    <div>
+    <div className="w-full max-w-[70%]">
       <DirectionSelector />
-      <div className="block w-full items-start gap-9 md:flex">
-        <Sidebar
-          uniqueDestinations={uniqueDestinations}
-          direction={params.direction}
-          city={params.city}
-        />
-        {children}
-      </div>
+      {children}
     </div>
   );
 }
