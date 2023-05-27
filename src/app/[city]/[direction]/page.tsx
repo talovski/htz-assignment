@@ -1,14 +1,9 @@
 export const dynamic = "force-dynamic";
 
 import { Suspense } from "react";
-
 import { getScheduleData } from "@/lib/getScheduleData";
 import Train from "@/app/[city]/[direction]/components/Train";
 import Searchbar from "@/app/[city]/[direction]/components/Searchbar";
-
-function SearchBarFallback() {
-  return <></>;
-}
 
 export async function generateStaticParams({
   params: { city },
@@ -20,6 +15,8 @@ export async function generateStaticParams({
     return { city: city, direction: direction };
   });
 }
+
+const TrainsFallback = <>Loading</>;
 
 export default async function Direction({
   params,
@@ -46,22 +43,22 @@ export default async function Direction({
   );
   return (
     <>
-      <Suspense fallback={<SearchBarFallback />}>
-        <Searchbar />
-      </Suspense>
+      <Searchbar />
       <div>
-        {searchedSchedules.map((train) => (
-          <Train
-            key={train.name}
-            name={train.name}
-            to={train.to}
-            time={
-              params.direction === "departure"
-                ? train.stop.departure
-                : train.stop.arrival ?? train.stop.prognosis.arrival
-            }
-          />
-        ))}
+        <Suspense fallback={TrainsFallback}>
+          {searchedSchedules.map((train) => (
+            <Train
+              key={train.name}
+              name={train.name}
+              to={train.to}
+              time={
+                params.direction === "departure"
+                  ? train.stop.departure
+                  : train.stop.arrival ?? train.stop.prognosis.arrival
+              }
+            />
+          ))}
+        </Suspense>
       </div>
     </>
   );
